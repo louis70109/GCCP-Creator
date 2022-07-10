@@ -19,6 +19,14 @@ Note:
 {"name": "testing-1.mp3", "bucket": "my-bucket", "contentType": "audio/mpeg"}
 ```
 
+## 部署
+
+透過 gcloud 指令把專案推上去，方便在不需要本地透過 Docker 建立 container，推上去之後會在 GCP 上自動建立 Container 並提供給 CloudRUn 使用。
+
+```shell
+gcloud run deploy nijia-cloud-run-example-1 --source .
+```
+
 ## 參考
 
 - [SRT format wiki](https://en.wikipedia.org/wiki/SubRip#SubRip_text_file_format)
