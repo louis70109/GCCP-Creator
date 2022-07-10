@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+aiofiles
+google-cloud-speech
+google-cloud-storage
+gunicorn
