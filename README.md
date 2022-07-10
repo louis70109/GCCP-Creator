@@ -31,3 +31,12 @@ gcloud run deploy nijia-cloud-run-example-1 --source .
 
 - [SRT format wiki](https://en.wikipedia.org/wiki/SubRip#SubRip_text_file_format)
 - [YouTube 支援的字幕檔案](https://support.google.com/youtube/answer/2734698?hl=zh-Hant#zippy=%2C%E5%9F%BA%E6%9C%AC%E6%AA%94%E6%A1%88%E6%A0%BC%E5%BC%8F%2C%E9%80%B2%E9%9A%8E%E6%AA%94%E6%A1%88%E6%A0%BC%E5%BC%8F)
+
+<img width="982" alt="截圖 2022-07-10 下午4 55 54" src="https://user-images.githubusercontent.com/6940010/178138504-67322953-83c0-40d5-b2c0-b52c7bf23304.png">
+<img width="843" alt="截圖 2022-07-10 下午4 58 07" src="https://user-images.githubusercontent.com/6940010/178138509-bc1346a1-cd32-4866-9ef8-94a542adcbda.png">
+<img width="915" alt="截圖 2022-07-10 下午4 58 23" src="https://user-images.githubusercontent.com/6940010/178138510-98f9c361-7911-441e-8578-3da482d0cf37.png">
+<img width="677" alt="截圖 2022-07-10 下午4 58 44" src="https://user-images.githubusercontent.com/6940010/178138513-3a91d96c-af10-4ed8-925b-5d22d879c063.png">
+<img width="590" alt="截圖 2022-07-10 下午4 59 03" src="https://user-images.githubusercontent.com/6940010/178138514-8319e00b-81a1-486f-b841-7c3f1866c122.png">
+<img width="905" alt="截圖 2022-07-10 下午5 02 05" src="https://user-images.githubusercontent.com/6940010/178138516-31b8ced1-8e69-454c-9b70-521b49cc0353.png">
+<img width="570" alt="截圖 2022-07-10 下午5 03 18" src="https://user-images.githubusercontent.com/6940010/178138517-e77fa6f3-c74d-4d9a-8784-4b7aca9506a7.png">
+
