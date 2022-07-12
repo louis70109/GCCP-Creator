@@ -48,8 +48,14 @@ gcloud run deploy nijia-cloud-run-example-1 --source .
 5. 因為有觸發 Speech-To-Text，Cloud Storage 處理完之後會建立一個 SRT 字幕檔並存回去。
 <img width="982" alt="截圖 2022-07-10 下午4 55 54" src="https://user-images.githubusercontent.com/6940010/178138504-67322953-83c0-40d5-b2c0-b52c7bf23304.png">
 
-youtube
+6. 檔案下載完之後，把原本剪好的影片檔上傳到 youtube 上，在上傳的分頁中會找到 `新增字幕`，給他大力的點下去
+
 <img width="915" alt="截圖 2022-07-10 下午4 58 23" src="https://user-images.githubusercontent.com/6940010/178138510-98f9c361-7911-441e-8578-3da482d0cf37.png">
+
+7. 這個專案會幫忙建立有時間序列的 SRT 字幕，點下去後找剛剛存個字幕檔。
 <img width="677" alt="截圖 2022-07-10 下午4 58 44" src="https://user-images.githubusercontent.com/6940010/178138513-3a91d96c-af10-4ed8-925b-5d22d879c063.png">
+
+7. 雖然透過 STT 切出來的檔案都到微秒，看起來好像會對不上，然而實際上在播放時都是很順暢的！Youtube 的編輯器寫得很棒，大家可以試試看！
+
 <img width="590" alt="截圖 2022-07-10 下午4 59 03" src="https://user-images.githubusercontent.com/6940010/178138514-8319e00b-81a1-486f-b841-7c3f1866c122.png">
 
