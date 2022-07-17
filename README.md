@@ -2,7 +2,7 @@
 
 由來：運用 GCP 服務的流程串接，建立 CC 字幕給影片編輯使用
 
-Cloud Storage - Eventarc receive signal - Trigger CloudRun - Call Speech-To-Text API - CC generator - Save to Cloud Storage - Download!
+![image](https://user-images.githubusercontent.com/6940010/179404121-5f08d362-5cf9-4495-bbda-d67039beff54.png)
 
 Note:
 - Cloud Run 需要設定 eventarc
