@@ -2,7 +2,7 @@
 
 由來：運用 GCP 服務的流程串接，建立 CC 字幕給影片編輯使用
 
-Cloud Storage - Eventarc receive signal - Trigger CloudRun - Call Speech-To-Text API - CC generator - Save to Cloud Storage - Download!
+![image](https://user-images.githubusercontent.com/6940010/179404121-5f08d362-5cf9-4495-bbda-d67039beff54.png)
 
 Note:
 - Cloud Run 需要設定 eventarc
@@ -31,3 +31,31 @@ gcloud run deploy nijia-cloud-run-example-1 --source .
 
 - [SRT format wiki](https://en.wikipedia.org/wiki/SubRip#SubRip_text_file_format)
 - [YouTube 支援的字幕檔案](https://support.google.com/youtube/answer/2734698?hl=zh-Hant#zippy=%2C%E5%9F%BA%E6%9C%AC%E6%AA%94%E6%A1%88%E6%A0%BC%E5%BC%8F%2C%E9%80%B2%E9%9A%8E%E6%AA%94%E6%A1%88%E6%A0%BC%E5%BC%8F)
+
+## 操作方法
+
+1. 到 Cloud Storage 中先建立一個空的 Bucket
+
+2. 選擇稍早推上去的 CloudRun app，選擇上面的 `add eventarc` 建立一個事件觸發裝置。
+<img width="905" alt="截圖 2022-07-10 下午5 02 05" src="https://user-images.githubusercontent.com/6940010/178138516-31b8ced1-8e69-454c-9b70-521b49cc0353.png">
+
+3. 因為此範例使需要上傳檔案，因此這邊就監聽 Cloud Storage 的事件，設定如下：
+<img width="570" alt="截圖 2022-07-10 下午5 03 18" src="https://user-images.githubusercontent.com/6940010/178138517-e77fa6f3-c74d-4d9a-8784-4b7aca9506a7.png">
+
+4. 把預計要轉成文字的影片檔輸出成 MP3 後，放進去 Cloud Storage。
+<img width="843" alt="截圖 2022-07-10 下午4 58 07" src="https://user-images.githubusercontent.com/6940010/178138509-bc1346a1-cd32-4866-9ef8-94a542adcbda.png">
+
+5. 因為有觸發 Speech-To-Text，Cloud Storage 處理完之後會建立一個 SRT 字幕檔並存回去。
+<img width="982" alt="截圖 2022-07-10 下午4 55 54" src="https://user-images.githubusercontent.com/6940010/178138504-67322953-83c0-40d5-b2c0-b52c7bf23304.png">
+
+6. 檔案下載完之後，把原本剪好的影片檔上傳到 youtube 上，在上傳的分頁中會找到 `新增字幕`，給他大力的點下去
+
+<img width="915" alt="截圖 2022-07-10 下午4 58 23" src="https://user-images.githubusercontent.com/6940010/178138510-98f9c361-7911-441e-8578-3da482d0cf37.png">
+
+7. 這個專案會幫忙建立有時間序列的 SRT 字幕，點下去後找剛剛存個字幕檔。
+<img width="677" alt="截圖 2022-07-10 下午4 58 44" src="https://user-images.githubusercontent.com/6940010/178138513-3a91d96c-af10-4ed8-925b-5d22d879c063.png">
+
+7. 雖然透過 STT 切出來的檔案都到微秒，看起來好像會對不上，然而實際上在播放時都是很順暢的！Youtube 的編輯器寫得很棒，大家可以試試看！
+
+<img width="590" alt="截圖 2022-07-10 下午4 59 03" src="https://user-images.githubusercontent.com/6940010/178138514-8319e00b-81a1-486f-b841-7c3f1866c122.png">
+
