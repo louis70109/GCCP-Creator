@@ -67,7 +67,7 @@ def upload_data_to_gcs(bucket_name, data, target_key, meta=None):
     return None
 
 
-def contents_dict_to_vtt(contents):
+def contents_dict_to_subtitle(contents , vtt=False):
     # [{
     #         "description": "我覺不得了。",
     #         "id": 0,
@@ -77,7 +77,8 @@ def contents_dict_to_vtt(contents):
     #          "end_time": "0:01:59.600",
     #          "start_time": "0:00:59.900",
     #          "description": "Ok有經驗？"}]
-    result = ''
+
+    result = 'WEBVTT\n\n' if vtt else ''
     content_len, idx, count = len(contents), 0, 0
 
     # Arrange firebase data list sequence
@@ -117,21 +118,27 @@ async def index(request: Request):
         scripts = transcribe_gcs(data['bucket'], data['name'])
         results = scripts.results
 
-        vtt = []
+        subtitle = []
         count = 0
         for word in list(results[0].alternatives[0].words):
-            vtt.append({
+            subtitle.append({
                 'id': count,
                 'description': word.word,
                 'start_time': time_transfer(word.start_time),
                 'end_time': time_transfer(word.end_time)
             })
             count += 1
-        print('VTT dict done')
-        vtt_string_result = contents_dict_to_vtt(vtt)
+        print('SRT dict done')
+        print('Generate to SRT format')
+        srt_string_result = contents_dict_to_subtitle(subtitle)
         print('wait to upload to gcs')
-        upload_data_to_gcs(data['bucket'], vtt_string_result, f'{data["name"]}.srt',
+        upload_data_to_gcs(data['bucket'], srt_string_result, f'{data["name"]}.srt',
                            meta='text/srt')
+        print('Generate to VTT format')
+        vtt_string_result = contents_dict_to_subtitle(subtitle, vtt=True)
+        print('wait to upload to gcs')
+        upload_data_to_gcs(data['bucket'], vtt_string_result, f'{data["name"]}.vtt',
+                           meta='text/vtt')
         print('upload success')
 
     # resp = f"Hello, Nijia! ID: {request.headers.get('ce-id')}"
