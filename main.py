@@ -133,9 +133,6 @@ async def index(request: Request):
         print('Generate to VTT format')
         vtt_string_result = contents_dict_to_subtitle(vtt_sub, vtt=True)
         print('wait to upload to gcs')
-        print(vtt_sub)
-        print(":===============")
-        print(vtt_string_result)
         upload_data_to_gcs(data['bucket'], vtt_string_result, f'{data["name"]}.vtt',
                            meta='text/vtt')
         print('upload success')
