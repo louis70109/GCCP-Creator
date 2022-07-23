@@ -24,11 +24,6 @@ except:
     google_temp.close()
 
 
-@app.route("/")
-def helthz():
-    return "Hello!"
-
-
 def transcribe_gcs(bucket, audio):
     """Asynchronously transcribes the audio file specified by the gcs_uri."""
     print('-------------Start to recognize')
@@ -67,7 +62,7 @@ def upload_data_to_gcs(bucket_name, data, target_key, meta=None):
     return None
 
 
-def contents_dict_to_subtitle(contents , vtt=False):
+def contents_dict_to_subtitle(contents, vtt=False):
     # [{
     #         "description": "我覺不得了。",
     #         "id": 0,
@@ -128,6 +123,7 @@ async def index(request: Request):
                 'end_time': time_transfer(word.end_time)
             })
             count += 1
+        vtt_sub = subtitle.copy()
         print('SRT dict done')
         print('Generate to SRT format')
         srt_string_result = contents_dict_to_subtitle(subtitle)
@@ -135,15 +131,17 @@ async def index(request: Request):
         upload_data_to_gcs(data['bucket'], srt_string_result, f'{data["name"]}.srt',
                            meta='text/srt')
         print('Generate to VTT format')
-        vtt_string_result = contents_dict_to_subtitle(subtitle, vtt=True)
+        vtt_string_result = contents_dict_to_subtitle(vtt_sub, vtt=True)
         print('wait to upload to gcs')
+        print(vtt_sub)
+        print(":===============")
+        print(vtt_string_result)
         upload_data_to_gcs(data['bucket'], vtt_string_result, f'{data["name"]}.vtt',
                            meta='text/vtt')
         print('upload success')
-
-    # resp = f"Hello, Nijia! ID: {request.headers.get('ce-id')}"
-    return "HI", 200
+        return "HI", 200
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=int(os.environ.get("PORT", 8080)), reload=True)
+    reload = True if os.getenv('API_ENV') != 'production' else False
+    uvicorn.run("main:app", host="0.0.0.0", port=int(os.environ.get("PORT", 8080)), reload=reload)
