@@ -59,3 +59,6 @@ gcloud run deploy nijia-cloud-run-example-1 --source .
 
 <img width="590" alt="截圖 2022-07-10 下午4 59 03" src="https://user-images.githubusercontent.com/6940010/178138514-8319e00b-81a1-486f-b841-7c3f1866c122.png">
 
+## License
+
+MIT
