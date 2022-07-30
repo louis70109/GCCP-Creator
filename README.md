@@ -2,14 +2,16 @@
 
 由來：運用 GCP 服務的流程串接，建立 CC 字幕給影片編輯使用
 
-![image](https://user-images.githubusercontent.com/6940010/179404121-5f08d362-5cf9-4495-bbda-d67039beff54.png)
+> 此專案已在 [COSCUP 2022 分享](https://coscup.org/2022/zh-TW/session/P7HXPX)
+
+<img width="1051" alt="截圖 2022-07-30 上午9 18 28" src="https://user-images.githubusercontent.com/6940010/181864807-d045bb08-b18f-48e3-820f-25ac703de02a.png">
 
 Note:
 - Cloud Run 需要設定 eventarc
 - STT 不吃 mp4，檔案輸出時需要轉成 mp3 丟到 cloud storage 
-- STT 轉出來會變成 datetime.timedelta 的格式，格式中不是 iterator，因此 API 回來後不能直接使用。[參考說明](https://stackoverflow.com/questions/3790848/fastest-way-to-convert-an-iterator-to-a-list)後要用 list 把它轉出來，才能抓到裡面的數值
+- STT 轉出來會變成 datetime.timedelta 的格式，格式中不是 iterator，因此 API 回來後不能直接使用。[參考說明](https://stackoverflow.com/questions/3790848/fastest-way-to-convert-an-iterator-to-a-list)後要用 list 把它轉出來，才能抓到裡面的數值。
 - 原本打算用 WebVTT 格式操作，但在 [Youtube 文件](https://support.google.com/youtube/answer/2734698?hl=zh-Hant#zippy=%2C%E5%9F%BA%E6%9C%AC%E6%AA%94%E6%A1%88%E6%A0%BC%E5%BC%8F%2C%E9%80%B2%E9%9A%8E%E6%AA%94%E6%A1%88%E6%A0%BC%E5%BC%8F)中說明了`目前仍在初步實行階段`，因此在此專案中則是用 SRT 作為使用。
-- videojs 中需要 Big5 才可以 generate，而在 SRT 中他需要 UTF-8，因此這邊就把Big5 拔除(TBC)
+- 在 GCS 上點開看字幕檔都是亂碼，但進去 Youtube || videojs 中，都會是可以被讀取。
 
 ## 開發測試
 
@@ -24,6 +26,8 @@ Note:
 透過 gcloud 指令把專案推上去，方便在不需要本地透過 Docker 建立 container，推上去之後會在 GCP 上自動建立 Container 並提供給 CloudRUn 使用。
 
 ```shell
+git clone https://github.com/louis70109/GCCP-Creator.git
+cd GCCP-Creator
 gcloud run deploy nijia-cloud-run-example-1 --source .
 ```
 
