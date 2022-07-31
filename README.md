@@ -3,6 +3,7 @@
 由來：運用 GCP 服務的流程串接，建立 CC 字幕給影片編輯使用
 
 > 此專案已在 [COSCUP 2022 分享](https://coscup.org/2022/zh-TW/session/P7HXPX)
+> [簡報](https://speakerdeck.com/line_developers_tw/gccp-creator-at-coscup-2022)
 
 <img width="1051" alt="截圖 2022-07-30 上午9 18 28" src="https://user-images.githubusercontent.com/6940010/181864807-d045bb08-b18f-48e3-820f-25ac703de02a.png">
 
